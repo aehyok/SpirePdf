@@ -55,9 +55,10 @@ namespace aehyok.Spire.Pdf
             PdfBrush brush1 = PdfBrushes.Black;
             //PdfTrueTypeFont font1 = new PdfTrueTypeFont(new Font("Arial", 16f, FontStyle.Bold));
 
-            PdfTrueTypeFont font1=new PdfTrueTypeFont(new Font("STSong-Light",16f, FontStyle.Regular));
+            var fontUrl = "C:/WINDOWS/Fonts/AdobeSongStd-Light.otf";
+            PdfTrueTypeFont font1=new PdfTrueTypeFont(new Font("Arial", 16f),true);
             PdfStringFormat format1 = new PdfStringFormat(PdfTextAlignment.Center);
-            page.Canvas.DrawString("Country列表", font1, brush1, page.Canvas.ClientSize.Width / 2, y, format1);
+            page.Canvas.DrawString("Country dsfa列表", font1, brush1, page.Canvas.ClientSize.Width / 2, y, format1);
             y = y + font1.MeasureString("Country列表", format1).Height;
             y = y + 5;
 
