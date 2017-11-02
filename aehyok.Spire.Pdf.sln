@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Spire.Pdf", "aehyok.Spire.Pdf\aehyok.Spire.Pdf.csproj", "{919C9EE9-90A4-40CC-B5B6-1721DDEC8035}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.SpirePdf", "aehyok.SpirePdf\aehyok.SpirePdf.csproj", "{14685425-A49A-4C4C-B1E2-547C8D6AC186}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.SpireDoc", "aehyok.SpireDoc\aehyok.SpireDoc.csproj", "{FBAD08DF-5B9E-4D65-8664-CA5BE58FFAA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{919C9EE9-90A4-40CC-B5B6-1721DDEC8035}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{919C9EE9-90A4-40CC-B5B6-1721DDEC8035}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{919C9EE9-90A4-40CC-B5B6-1721DDEC8035}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14685425-A49A-4C4C-B1E2-547C8D6AC186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14685425-A49A-4C4C-B1E2-547C8D6AC186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14685425-A49A-4C4C-B1E2-547C8D6AC186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14685425-A49A-4C4C-B1E2-547C8D6AC186}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBAD08DF-5B9E-4D65-8664-CA5BE58FFAA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBAD08DF-5B9E-4D65-8664-CA5BE58FFAA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBAD08DF-5B9E-4D65-8664-CA5BE58FFAA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBAD08DF-5B9E-4D65-8664-CA5BE58FFAA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
