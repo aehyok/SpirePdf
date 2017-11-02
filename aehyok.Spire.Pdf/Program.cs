@@ -1,5 +1,6 @@
 ﻿using Spire.License;
 using Spire.Pdf;
+using Spire.Pdf.Exporting.XPS.Schema;
 using Spire.Pdf.Graphics;
 using Spire.Pdf.Tables;
 using System;
@@ -27,7 +28,7 @@ namespace aehyok.Spire.Pdf
 
         public static void Create_01()
         {
-            ///1、创建一个PDF 的Document
+            //1、创建一个PDF 的Document
             PdfDocument doc = new PdfDocument();
             PdfUnitConvertor unitCvtr = new PdfUnitConvertor();
             PdfMargins margin = new PdfMargins();
@@ -39,11 +40,11 @@ namespace aehyok.Spire.Pdf
             //2、创建一个margin为上面定义的PDF的Page页
             PdfPageBase page = doc.Pages.Add(PdfPageSize.A4, margin);
 
-            ///3、插入一个背景图片
+            //3、插入一个背景图片
             //System.Drawing.Image img = System.Drawing.Image.FromFile(@"1.png");
             //page.BackgroundImage = img;
 
-            ////4、添加水印
+            //4、添加水印
             PdfTilingBrush brush
                 = new PdfTilingBrush(new SizeF(page.Canvas.ClientSize.Width / 2, page.Canvas.ClientSize.Height / 3));
             brush.Graphics.SetTransparency(0.3f);
@@ -110,17 +111,24 @@ namespace aehyok.Spire.Pdf
             //创建一个PDF文档
             PdfDocument doc = new PdfDocument();
 
+            PdfUnitConvertor unitCvtr = new PdfUnitConvertor();
+            PdfMargins margin = new PdfMargins();
+            //margin.Top = unitCvtr.ConvertUnits(2.54f, PdfGraphicsUnit.Centimeter, PdfGraphicsUnit.Point);
+            //margin.Bottom = margin.Top;
+            //margin.Left = unitCvtr.ConvertUnits(3.17f, PdfGraphicsUnit.Centimeter, PdfGraphicsUnit.Point);
+            //margin.Right = margin.Left;
+
             //添加新页
-            PdfPageBase page = doc.Pages.Add();
+            PdfPageBase page = doc.Pages.Add(PdfPageSize.A4, margin);
 
 
             var fontUrl = @"C:/WINDOWS/Fonts/AdobeSongStd-Light.otf";
             //实例化一个TrueType font对象
-            PdfTrueTypeFont trueTypeFont = new PdfTrueTypeFont(fontUrl, 12);
-
+            PdfTrueTypeFont font = new PdfTrueTypeFont(fontUrl, 12, PdfFontStyle.Regular);
+            PdfTrueTypeFont fontUnderline = new PdfTrueTypeFont(fontUrl, 12, PdfFontStyle.Underline);
 
             PdfStringFormat pdfStringFormat = new PdfStringFormat();
-            pdfStringFormat.ParagraphIndent = 50;
+            pdfStringFormat.ParagraphIndent = 25;
 
             var SubText = @"中国根据《中华人民共和国海关法》第九十三条、《中华人民共和国海关行政处罚,施条例》第六十条的规定，"
                                         + "当事人逾期不履行处罚决定又不申请复议或者向人民法院提起诉讼的，海关可以将扣留的货物、物品、"
@@ -129,38 +137,73 @@ namespace aehyok.Spire.Pdf
 
             float y = 10;
             var index = 0;
-            PdfStringFormat format2 = new PdfStringFormat(PdfTextAlignment.Justify);
+            PdfStringFormat format = new PdfStringFormat(PdfTextAlignment.Justify);
             for (var i = 0; i < 4; i++)
             {
                 if (index == 0)
                 {
-                    page.Canvas.DrawString(SubText.Substring(0, 36), trueTypeFont, PdfBrushes.Black, 36, y, format2);
+                    page.Canvas.DrawString(SubText.Substring(0, 36), font, PdfBrushes.Black, 36, y, format);
                 }
                 else
                 {
                     if(i<3)
                     {
-                        page.Canvas.DrawString(SubText.Substring(index, 38), trueTypeFont, PdfBrushes.Black, 10, y, format2);
+                        page.Canvas.DrawString(SubText.Substring(index, 38), font, PdfBrushes.Black, 10, y, format);
+                        var size11 = font.MeasureString(SubText.Substring(index, 38), format);
                     }
                     else
                     {
-                        page.Canvas.DrawString(SubText.Substring(index, SubText.Length-index), trueTypeFont, PdfBrushes.Black, 10, y, format2);
+                        page.Canvas.DrawString(SubText.Substring(index, SubText.Length-index), font, PdfBrushes.Black, 10, y, format);
                     }
                     
                 }
 
-                y = y + trueTypeFont.Height + 1 + i;
+                y = y + font.Height + 1 + i;
 
                 index = index + 38;
             }
+            //456 = 38*12；
+            var currentWidth = 0.0;
+            var key1 = "英雄名称雄名称英雄名称英雄名称英雄名称，";
+            var size = font.MeasureString(key1, format);
+            page.Canvas.DrawString(key1, font, PdfBrushes.Black, 36, y);
+            currentWidth = size.Width;
+            var value1 = "宫本武藏宫本武藏宫本武藏宫本武藏宫本武藏宫本武藏宫本武藏宫本武藏宫本武藏";
+            var x = 36+size.Width;
 
-
-            //page.Canvas.DrawString("999999999999999999999999999",
-                                       // trueTypeFont, PdfBrushes.Black, 30,50, pdfStringFormat);
+            var width = size.Width;
+            size = fontUnderline.MeasureString(value1, format);
+            width = width + size.Width;
+            int temp = 0;
+            if(width > 456)
+            {
+                var tempWidth = 456 - currentWidth;
+                temp=(int)tempWidth / 12;
+                page.Canvas.DrawString(value1.Substring(0, temp-1), fontUnderline, PdfBrushes.Black, x, y);
+            }
+            page.Canvas.DrawString(value1.Substring(temp, value1.Length-temp), fontUnderline, PdfBrushes.Black, 36, y + fontUnderline.Height + 1 + 1);
 
             //保存文档
             doc.SaveToFile("SimpleTable.pdf");
             System.Diagnostics.Process.Start("SimpleTable.pdf");
+        }
+
+        public static void Create_03()
+        {
+                        
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="currentWidth"></param>
+        /// <param name="TotalWidth"></param>
+        /// <param name="coordinateX"></param>
+        /// <param name="coordinateY"></param>
+        public void DrawContent(string content,float currentWidth,float TotalWidth,float coordinateX,float coordinateY)
+        {
+
         }
     }
 }
