@@ -183,7 +183,7 @@ namespace aehyok.Spire.Pdf
             }
             page.Canvas.DrawString(value1.Substring(temp, value1.Length-temp), fontUnderline, PdfBrushes.Black, 36, y + fontUnderline.Height + 1 + 1);
 
-            //保存文档
+            //保存文档测试
             doc.SaveToFile("SimpleTable.pdf");
             System.Diagnostics.Process.Start("SimpleTable.pdf");
         }
